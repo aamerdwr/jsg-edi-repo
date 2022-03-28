@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (request, response) => {
-    response.send('Hello ----------- ')
+    response.send('Hello ---AAMER-------- ')
 })
 
 app.get('/name:name', (request, response) => {
@@ -28,41 +28,26 @@ app.get('/name:name', (request, response) => {
 app.post('/data', (request, response) => {
 
     var {
-        POID,
-        POName,
-        OrderDate,
-        CustomerOrderNumber,
-        OrderType,
-        CustomerAccountID,
-        CustomerCompanyName,
-        SupplierCompanyName,
-        ShippingAddressId,
-        Lines
+    filename,
+       head,
+       lines
     } = request.body
 
-    const filename = POID + '-' + POName;
     const path = `files/${filename}`;
-    const head = "Head~" + OrderDate + "~" + CustomerOrderNumber + "~" + OrderType + "~" + CustomerAccountID + "~" + CustomerCompanyName + "~" + SupplierCompanyName + "~" + ShippingAddressId;
-    const lines = [];
-    for (let i = 0; i < Lines.length; i++) {
-        const line = "\nLine~" + Lines[i].Quantity + "~" + Lines[i].RequestedDate + "~" + Lines[i].SupplierPartNr + "~" + Lines[i].CustomerPartNr + "~" + Lines[i].PackCode;
-        lines[i] = line;
-    }
+
 
     var content = head + "" + lines.join("");
     fs.writeFile(path, content, function (err) {
         if (err) {
-            response.status(500).json({
+            return response.status(500).json({
                 msg: "Server side error",
                 Error: err
             });
-            return console.log(err);
         }
     });
     response.status(201).json({
-
         msg: "SUCCESS: File is created.",
-        name: filename
+        filename: filename
     })
 });
 

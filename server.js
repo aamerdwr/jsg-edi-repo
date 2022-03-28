@@ -3,12 +3,12 @@ const {
     app
 } = require('./app');
 
-const hostname = "192.168.16.1";
+const hostname = "ec2-3-25-177-193.ap-southeast-2.compute.amazonaws.com";
 
-const port = 9000;
+const port = 8888;
 
 const server = http.createServer(app);
 
-server.listen(port, () => {
+server.listen(port, hostname, () => {
     console.log(`Server running at ${port}`)
 });
