@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (request, response) => {
-    response.send('Hello ---AAMER-------- ')
+    response.send('BY DWR')
 })
 
 app.get('/name:name', (request, response) => {
